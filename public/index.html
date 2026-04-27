@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sireesha's Weight Loss Journey · 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#C2185B;--rose-light:#F8BBD9;--rose-pale:#FDF0F5;--rose-dark:#880E4F;
+  --sage:#4CAF7D;--sage-light:#C8E6C9;--sage-pale:#F1F8F4;
+  --gold:#D4A017;--gold-light:#FFF3CD;
+  --ink:#1A1215;--muted:#6B5B62;--border:#EDD5E0;
+  --surface:#FFFBFC;--card:#FFFFFF;
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'DM Sans',system-ui,sans-serif;
+  --r:14px;--rs:8px;
+  --sh:0 2px 20px rgba(194,24,91,0.08);
+  --shh:0 8px 32px rgba(194,24,91,0.16);
+}
+html{font-family:var(--font-b);font-size:15px;color:var(--ink);background:var(--surface)}
+body{min-height:100vh;padding-bottom:3rem}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#FDF0F5 0%,#FFF9FB 50%,#F0F9F4 100%);border-bottom:1px solid var(--border);padding:2rem 1.5rem 1.5rem;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(194,24,91,0.06),transparent 70%);pointer-events:none}
+.header::after{content:'';position:absolute;bottom:-40px;left:10%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(76,175,125,0.05),transparent 70%);pointer-events:none}
+.hi{position:relative;z-index:1;max-width:740px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--rose);margin-bottom:6px}
+.h-title{font-family:var(--font-d);font-size:30px;font-weight:600;color:var(--ink);line-height:1.15;margin-bottom:4px}
+.h-title em{color:var(--rose);font-style:italic}
+.h-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem}
+.h-stats{display:flex;gap:10px;flex-wrap:wrap}
+.hs{background:white;border:1px solid var(--border);border-radius:var(--rs);padding:10px 16px;text-align:center;min-width:88px;box-shadow:var(--sh)}
+.hs-val{font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--rose);line-height:1}
+.hs-val.g{color:var(--sage)}
+.hs-lbl{font-size:11px;color:var(--muted);margin-top:3px}
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ccc;margin-right:5px;vertical-align:middle;transition:background 0.3s}
+.sync-dot.ok{background:var(--sage)}
+.sync-dot.err{background:#e57373}
+
+/* NAV */
+.nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(194,24,91,0.06)}
+.nav-inner{max-width:740px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nb{flex-shrink:0;padding:14px 18px;border:none;background:none;cursor:pointer;font-family:var(--font-b);font-size:13px;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap}
+.nb.active{color:var(--rose);border-bottom-color:var(--rose);font-weight:500}
+.nb:hover:not(.active){color:var(--rose)}
+
+/* MAIN */
+.main{max-width:740px;margin:0 auto;padding:1.5rem 1rem}
+.page{display:none}.page.active{display:block}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;box-shadow:var(--sh);transition:box-shadow 0.2s;animation:fadeUp 0.35s ease both}
+.card:hover{box-shadow:var(--shh)}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.ci{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ci-r{background:var(--rose-pale);color:var(--rose)}
+.ci-s{background:var(--sage-pale);color:var(--sage)}
+.ci-g{background:var(--gold-light);color:var(--gold)}
+.ct{font-family:var(--font-d);font-size:16px;font-weight:600;color:var(--ink)}
+.csub{font-size:12px;color:var(--muted);margin-top:1px}
+
+/* DOSE GRID */
+.dose-row{display:grid;grid-template-columns:58px 1fr;gap:0;margin-bottom:5px;align-items:start}
+.dl{font-size:11px;font-weight:500;color:var(--rose);padding-top:8px;text-align:right;padding-right:10px}
+.dw{display:flex;gap:3px}
+.wk{flex:1;background:var(--rose-pale);border:1px solid var(--border);border-radius:6px;padding:6px 3px;text-align:center;cursor:pointer;transition:all 0.18s;position:relative;user-select:none}
+.wk:hover{border-color:var(--rose);transform:translateY(-1px)}
+.wk.curr{background:var(--rose);border-color:var(--rose)}
+.wk.done{background:#E8F5E9;border-color:var(--sage-light)}
+.wk.ord{border-color:var(--gold);background:var(--gold-light)}
+.wn{font-size:9px;color:var(--muted);line-height:1}
+.wk.curr .wn,.wk.curr .wd{color:rgba(255,255,255,0.85)}
+.wd{font-size:11px;font-weight:500;display:block;color:var(--ink);line-height:1.3;margin-top:1px}
+.wk.done .wd{color:var(--sage)}
+.wk.curr .wd{color:white;font-weight:600}
+.wk.ord .wd{color:var(--gold)}
+.opip{position:absolute;top:-4px;right:-4px;width:8px;height:8px;background:var(--gold);border-radius:50%;border:1.5px solid white}
+
+/* FORM */
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.3px}
+.fg input,.fg select,.fg textarea{font-family:var(--font-b);font-size:14px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--ink);transition:border-color 0.2s,box-shadow 0.2s;width:100%}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 3px rgba(194,24,91,0.08);background:white}
+.fg textarea{resize:vertical;min-height:72px}
+.fg.full{grid-column:1/-1}
+
+/* BUTTONS */
+.btn{font-family:var(--font-b);font-size:13px;font-weight:500;padding:9px 20px;border-radius:var(--rs);cursor:pointer;transition:all 0.18s;border:1px solid var(--border);display:inline-flex;align-items:center;gap:6px}
+.btn-rose{background:var(--rose);color:white;border-color:var(--rose)}
+.btn-rose:hover{background:var(--rose-dark);box-shadow:0 4px 16px rgba(194,24,91,0.3)}
+.btn-sage{background:var(--sage);color:white;border-color:var(--sage)}
+.btn-sage:hover{background:#3D8F67;box-shadow:0 4px 16px rgba(76,175,125,0.3)}
+.btn-ghost{background:transparent;color:var(--muted)}
+.btn-ghost:hover{background:var(--rose-pale);color:var(--rose)}
+.btn-wa{background:#25D366;color:white;border-color:#1da851}
+.btn-wa:hover{background:#1da851}
+.btn-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+
+/* UPLOAD */
+.upload-z{border:2px dashed var(--border);border-radius:var(--rs);padding:20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-top:8px}
+.upload-z:hover{border-color:var(--rose);background:var(--rose-pale)}
+.upload-z p{font-size:12px;color:var(--muted);margin-top:5px}
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.ith{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--rs);border:1px solid var(--border)}
+
+/* STATS */
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}
+.sc{background:white;border:1px solid var(--border);border-radius:var(--r);padding:14px 10px;text-align:center;box-shadow:var(--sh)}
+.sv{font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--rose);line-height:1}
+.sv.g{color:var(--sage)}
+.sl{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* HISTORY */
+.li{padding:12px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.li:last-child{border-bottom:none}
+.lwb{background:var(--rose-pale);color:var(--rose);font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.lwb.d{background:var(--sage-pale);color:var(--sage)}
+.ld{font-size:13px;color:var(--ink);line-height:1.6}
+.ld .lw{font-family:var(--font-d);font-size:17px;font-weight:600;color:var(--rose)}
+.ld .ln{color:var(--muted);font-size:12px;margin-top:2px}
+.ldelta{font-size:12px;font-weight:500;text-align:right;white-space:nowrap}
+.dd{color:var(--sage)}.du{color:#e57373}
+.etag{display:inline-block;background:#FFF3E0;color:#E65100;border:1px solid #FFCC02;border-radius:20px;font-size:11px;padding:2px 9px;margin:2px}
+
+/* CHART */
+.cw{position:relative;margin:8px 0}
+
+/* BANNER */
+.banner{background:linear-gradient(110deg,var(--rose),#D63384);border-radius:var(--r);padding:16px 20px;color:white;display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;box-shadow:0 6px 24px rgba(194,24,91,0.28)}
+.bl h3{font-family:var(--font-d);font-size:18px;font-weight:600}
+.bl p{font-size:12px;opacity:0.85;margin-top:3px}
+.br{text-align:center;min-width:60px}
+.bd{font-family:var(--font-d);font-size:34px;font-weight:600;line-height:1}
+.blab{font-size:11px;opacity:0.8;margin-top:2px}
+
+/* MOTIVATION */
+.qcard{background:linear-gradient(135deg,var(--rose-pale),#FFF8FC);border:1px solid var(--rose-light);border-radius:var(--r);padding:1.75rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden}
+.qcard::before{content:'\201C';font-family:var(--font-d);font-size:90px;color:var(--rose-light);position:absolute;top:-15px;left:10px;line-height:1;pointer-events:none}
+.qt{font-family:var(--font-d);font-size:16px;font-style:italic;color:var(--ink);line-height:1.75;position:relative;padding-left:16px}
+.qs{font-size:12px;color:var(--muted);margin-top:10px;padding-left:16px}
+.ai-box{background:white;border:1px solid var(--border);border-radius:var(--r);padding:1rem;font-size:14px;color:var(--ink);line-height:1.75;margin-top:10px}
+.ai-box.loading{color:var(--muted);font-style:italic}
+
+/* REMINDER */
+.ri{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.ri:last-child{border-bottom:none}
+.rdot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.rd-r{background:var(--rose)}.rd-g{background:var(--gold)}.rd-s{background:var(--sage)}
+.rinfo{flex:1}
+.rt{font-size:13px;font-weight:500;color:var(--ink)}
+.rs{font-size:12px;color:var(--muted);margin-top:2px}
+.pill{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500;white-space:nowrap}
+.p-g{background:var(--sage-pale);color:var(--sage)}
+.p-d{background:var(--gold-light);color:#8D6E00}
+.p-r{background:var(--rose-pale);color:var(--rose)}
+
+/* WA CARD */
+.wa-card{background:#E8F5E9;border:1px solid #A5D6A7;border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.wa-ic{width:42px;height:42px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:20px;font-weight:bold;flex-shrink:0}
+.wa-in h3{font-size:14px;font-weight:500;color:#1B5E20}
+.wa-in p{font-size:12px;color:#388E3C;margin-top:2px}
+
+/* MILESTONE */
+.mst{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.mst:last-child{border-bottom:none}
+
+/* LEGEND */
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.leg-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted)}
+.leg-d{width:8px;height:8px;border-radius:2px}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:white;padding:12px 24px;border-radius:var(--r);font-size:13px;transition:transform 0.35s cubic-bezier(.34,1.56,.64,1);z-index:9999;pointer-events:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* SETUP BANNER */
+.setup-banner{background:#FFF3E0;border:1px solid #FFCC02;border-radius:var(--rs);padding:12px 16px;font-size:13px;color:#5D4037;margin-bottom:1rem;display:flex;gap:10px;align-items:flex-start}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.pulsing{animation:pulse 1.5s infinite}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="hi">
+    <div class="eyebrow">Personal health tracker · Mounjaro programme · 2026</div>
+    <div class="h-title"><em>Sireesha's</em> Weight Loss Journey</div>
+    <div class="h-sub">
+      <span class="sync-dot" id="sync-dot"></span>
+      <span id="sync-status">Connecting to server...</span>
+      &nbsp;·&nbsp; 24-week programme &nbsp;·&nbsp; Started April 27, 2026
+    </div>
+    <div class="h-stats">
+      <div class="hs"><div class="hs-val" id="hs-week">1</div><div class="hs-lbl">Current week</div></div>
+      <div class="hs"><div class="hs-val" id="hs-dose">2.5mg</div><div class="hs-lbl">Dose</div></div>
+      <div class="hs"><div class="hs-val g" id="hs-lost">0 kg</div><div class="hs-lbl">Lost so far</div></div>
+      <div class="hs"><div class="hs-val" id="hs-left">24</div><div class="hs-lbl">Weeks left</div></div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nb active" onclick="nav('dashboard',this)">Dashboard</button>
+    <button class="nb" onclick="nav('log',this)">Weekly Log</button>
+    <button class="nb" onclick="nav('progress',this)">Progress</button>
+    <button class="nb" onclick="nav('reminders',this)">Reminders</button>
+    <button class="nb" onclick="nav('motivation',this)">Motivation</button>
+  </div>
+</nav>
+
+<div class="main">
+
+<!-- DASHBOARD -->
+<div id="pg-dashboard" class="page active">
+  <div class="banner" id="main-banner">
+    <div class="bl">
+      <h3 id="bn-title">Next injection: this Sunday</h3>
+      <p id="bn-sub">2.5 mg · Week 1</p>
+    </div>
+    <div class="br">
+      <div class="bd" id="bn-days">7</div>
+      <div class="blab">days away</div>
+    </div>
+  </div>
+
+  <div class="sr">
+    <div class="sc"><div class="sv" id="st-start">—</div><div class="sl">Start weight</div></div>
+    <div class="sc"><div class="sv" id="st-curr">—</div><div class="sl">Current weight</div></div>
+    <div class="sc"><div class="sv g" id="st-lost">0 kg</div><div class="sl">Total lost</div></div>
+    <div class="sc"><div class="sv g" id="st-pct">0%</div><div class="sl">Body weight</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">📅</div><div><div class="ct">24-week dose timeline</div><div class="csub">Tap any week to view or log</div></div></div>
+    <div id="timeline"></div>
+    <div class="leg">
+      <div class="leg-i"><div class="leg-d" style="background:var(--rose)"></div>Current week</div>
+      <div class="leg-i"><div class="leg-d" style="background:#E8F5E9;border:1px solid var(--sage-light)"></div>Completed</div>
+      <div class="leg-i"><div class="leg-d" style="background:var(--gold-light);border:1px solid var(--gold)"></div>Order next pen</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-s">📈</div><div><div class="ct">Weight trend</div><div class="csub">All logged entries</div></div></div>
+    <div class="cw" style="height:200px"><canvas id="dash-chart"></canvas></div>
+    <div id="no-data-msg" style="text-align:center;font-size:13px;color:var(--muted);padding:1rem">Log your first week to see your chart!</div>
+  </div>
+</div>
+
+<!-- LOG -->
+<div id="pg-log" class="page">
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">✏️</div><div><div class="ct">Log this week</div><div class="csub">All data saved to server · shared with husband</div></div></div>
+    <div class="fg2">
+      <div class="fg"><label>Week</label><select id="lw"></select></div>
+      <div class="fg"><label>Weight (kg)</label><input type="number" id="lwt" placeholder="e.g. 82.5" step="0.1" min="30" max="250"></div>
+      <div class="fg"><label>Waist (cm) · optional</label><input type="number" id="lwa" placeholder="e.g. 92" step="0.5"></div>
+      <div class="fg"><label>Energy level (1–10)</label><input type="number" id="len" placeholder="7" min="1" max="10"></div>
+      <div class="fg full"><label>Side effects (if any)</label><textarea id="lef" placeholder="e.g. mild nausea first evening, settled by morning..."></textarea></div>
+      <div class="fg full"><label>How you felt · non-scale wins</label><textarea id="lno" placeholder="Energy levels, appetite changes, mood, clothes fitting better..."></textarea></div>
+      <div class="fg full"><label>Injection taken?</label>
+        <select id="linj">
+          <option value="">Select...</option>
+          <option value="yes">Yes — taken on Sunday</option>
+          <option value="late">Yes — taken late</option>
+          <option value="no">No — skipped this week</option>
+        </select>
+      </div>
+    </div>
+    <div class="upload-z" onclick="document.getElementById('img-inp').click()">
+      <div style="font-size:24px">📷</div>
+      <p>Tap to add a progress photo for this week</p>
+    </div>
+    <input type="file" id="img-inp" accept="image/*" style="display:none" onchange="handleImg(event)">
+    <div class="ig" id="log-imgs"></div>
+    <div class="btn-row">
+      <button class="btn btn-rose" onclick="saveLog()" id="save-btn">Save week entry</button>
+      <button class="btn btn-ghost" onclick="clearForm()">Clear</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-s">📋</div><div><div class="ct">All entries</div><div class="csub" id="entry-count">0 weeks logged</div></div></div>
+    <div id="log-hist"><p style="font-size:13px;color:var(--muted);text-align:center;padding:1.5rem 0">No entries yet — start logging above!</p></div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div id="pg-progress" class="page">
+  <div class="sr">
+    <div class="sc"><div class="sv" id="pr-s">—</div><div class="sl">Start weight</div></div>
+    <div class="sc"><div class="sv g" id="pr-l">0kg</div><div class="sl">Total lost</div></div>
+    <div class="sc"><div class="sv" id="pr-w">—</div><div class="sl">Waist (cm)</div></div>
+    <div class="sc"><div class="sv" id="pr-wks">0</div><div class="sl">Weeks logged</div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">⚖️</div><div><div class="ct">Weight over time</div></div></div>
+    <div class="cw" style="height:240px"><canvas id="wt-chart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ci ci-s">📊</div><div><div class="ct">Weekly loss</div></div></div>
+    <div class="cw" style="height:180px"><canvas id="bar-chart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ci ci-g">⚡</div><div><div class="ct">Energy levels</div></div></div>
+    <div class="cw" style="height:150px"><canvas id="en-chart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">🏆</div><div><div class="ct">Milestones</div></div></div>
+    <div id="milestones"></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">📸</div><div><div class="ct">Progress photos</div></div></div>
+    <div id="photo-gallery" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div>
+    <p id="no-photos" style="font-size:13px;color:var(--muted);text-align:center;padding:1.5rem 0">Photos added during logging appear here</p>
+  </div>
+</div>
+
+<!-- REMINDERS -->
+<div id="pg-reminders" class="page">
+  <div class="wa-card">
+    <div class="wa-ic">W</div>
+    <div class="wa-in"><h3>WhatsApp · +91 99459 77880</h3><p>Automated Sunday reminders · powered by Twilio</p></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-s">🔔</div><div><div class="ct">Send reminders</div><div class="csub">Browser notifications + WhatsApp</div></div></div>
+    <div class="btn-row">
+      <button class="btn btn-rose" onclick="enableNotifs()">🔔 Enable browser alerts</button>
+      <button class="btn btn-wa" onclick="sendWANow()">Send WhatsApp now</button>
+      <button class="btn btn-ghost" onclick="testNotif()">Test notification</button>
+    </div>
+    <div id="notif-status" style="font-size:12px;color:var(--muted);margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-g">⚙️</div><div><div class="ct">Twilio setup status</div><div class="csub">Automated 24/7 WhatsApp messages</div></div></div>
+    <div id="twilio-status" style="font-size:13px;color:var(--muted);line-height:1.8">Checking server...</div>
+    <div class="btn-row" style="margin-top:12px">
+      <button class="btn btn-ghost" onclick="triggerServerReminder()">📤 Trigger server reminder now</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">📆</div><div><div class="ct">Upcoming schedule</div></div></div>
+    <div id="rem-list"></div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F0F9F4,#FFFBFC)">
+    <div class="ch"><div class="ci ci-s">📋</div><div><div class="ct">Twilio quick-setup guide</div><div class="csub">Fill your .env file on the server</div></div></div>
+    <div style="background:#1A1215;color:#E8F5E9;border-radius:var(--rs);padding:14px;font-size:12px;font-family:monospace;line-height:2;margin-bottom:12px">
+      <div style="color:#F8BBD9">TWILIO_ACCOUNT_SID=<span style="color:#A5D6A7">ACxxxx...</span></div>
+      <div style="color:#F8BBD9">TWILIO_AUTH_TOKEN=<span style="color:#A5D6A7">your_token</span></div>
+      <div style="color:#F8BBD9">TWILIO_WHATSAPP_FROM=<span style="color:#A5D6A7">whatsapp:+14155238886</span></div>
+      <div style="color:#F8BBD9">RECIPIENT_PHONE=<span style="color:#A5D6A7">+919945977880</span></div>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.9">
+      <p>1. Go to <strong style="color:var(--ink)">console.twilio.com</strong> → Messaging → Senders → WhatsApp Senders</p>
+      <p>2. For sandbox: note the sandbox number (+14155238886) and join code</p>
+      <p>3. Send <strong style="color:var(--ink)">"join &lt;your-code&gt;"</strong> to +14155238886 on WhatsApp from your phone</p>
+      <p>4. Copy your Account SID and Auth Token into .env on your server</p>
+      <p>5. Restart the server — reminders fire automatically every Sunday 8am IST!</p>
+    </div>
+  </div>
+</div>
+
+<!-- MOTIVATION -->
+<div id="pg-motivation" class="page">
+  <div class="qcard">
+    <div class="qt" id="daily-quote">Loading your daily inspiration...</div>
+    <div class="qs">— Your daily motivation</div>
+  </div>
+
+  <div class="card">
+    <div class="ch"><div class="ci ci-r">✨</div><div><div class="ct">AI health coach</div><div class="csub">Ask anything about your journey</div></div></div>
+    <div class="fg" style="margin-bottom:10px"><textarea id="coach-q" placeholder="e.g. 'What should I eat to manage nausea?' or 'I'm craving sweets — what should I do?'" style="min-height:80px"></textarea></div>
+    <div class="btn-row">
+      <button class="btn btn-rose" onclick="askCoach()">Ask your coach</button>
+    </div>
+    <div class="ai-box loading pulsing" id="ai-resp" style="display:none">Your coach is thinking...</div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,var(--sage-pale),#FFFBFC)">
+    <div class="ch"><div class="ci ci-s">🧬</div><div><div class="ct">How Mounjaro works for you</div></div></div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.9">
+      <p><strong style="color:var(--ink)">Dual-action mechanism</strong> — Tirzepatide activates both GIP and GLP-1 receptors simultaneously, making it more powerful than single-receptor medications.</p>
+      <p style="margin-top:8px"><strong style="color:var(--ink)">What to expect</strong> — Appetite naturally reduces, blood sugar stabilises, and your body preferentially burns stored fat. Clinical trials showed 15–22% body weight reduction over 24 weeks.</p>
+      <p style="margin-top:8px"><strong style="color:var(--ink)">Dose escalation</strong> — Starting at 2.5mg and stepping up every 4 weeks lets your body adapt, minimising side effects while maximising results.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- .main -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── Config ─────────────────────────────────────────────────────────────────
+// When running locally: http://localhost:3000
+// When deployed (e.g. Railway, Render): change this to your server URL
+const API = window.location.origin;
+
+const doses = [
+  {w:1,mg:'2.5'},{w:2,mg:'2.5'},{w:3,mg:'2.5',order:true},{w:4,mg:'2.5'},
+  {w:5,mg:'5'},{w:6,mg:'5'},{w:7,mg:'5',order:true},{w:8,mg:'5'},
+  {w:9,mg:'7.5'},{w:10,mg:'7.5'},{w:11,mg:'7.5',order:true},{w:12,mg:'7.5'},
+  {w:13,mg:'10'},{w:14,mg:'10'},{w:15,mg:'10',order:true},{w:16,mg:'10'},
+  {w:17,mg:'12.5'},{w:18,mg:'12.5'},{w:19,mg:'12.5',order:true},{w:20,mg:'12.5'},
+  {w:21,mg:'15'},{w:22,mg:'15'},{w:23,mg:'15',order:true},{w:24,mg:'15'}
+];
+const quotes = [
+  "Every injection is a promise you kept to yourself.",
+  "Progress is not always visible on the scale — it lives in your choices.",
+  "Your body is adapting beautifully. Trust the process.",
+  "Small steps taken consistently create extraordinary transformations.",
+  "The Sireesha of 2027 is being built by today's decisions.",
+  "The hardest part was starting. You already did that.",
+  "Consistency is the only shortcut that actually works.",
+];
+
+let db = { currentWeek: 1, logs: [], photos: [] };
+let charts = {};
+
+// ─── API layer ───────────────────────────────────────────────────────────────
+async function apiGet(path) {
+  const r = await fetch(API + path);
+  return r.json();
+}
+async function apiPost(path, body) {
+  const r = await fetch(API + path, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  return r.json();
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+async function init() {
+  try {
+    db = await apiGet('/api/data');
+    setSyncStatus(true);
+  } catch(e) {
+    setSyncStatus(false);
+    toast('Server offline — running in local mode');
+    db = JSON.parse(localStorage.getItem('sireesha_local') || '{"currentWeek":1,"logs":[],"photos":[]}');
+  }
+  buildWeekSelect();
+  buildTimeline();
+  updateHeader();
+  renderHistory();
+  updateDashChart();
+  renderReminders();
+  document.getElementById('daily-quote').textContent = quotes[(new Date().getDay()) % quotes.length];
+  if(Notification.permission === 'granted') checkSundayNotif();
+  checkTwilioStatus();
+}
+
+function setSyncStatus(ok) {
+  const dot = document.getElementById('sync-dot');
+  const txt = document.getElementById('sync-status');
+  dot.className = 'sync-dot ' + (ok ? 'ok' : 'err');
+  txt.textContent = ok ? 'Connected · data syncs across all devices' : 'Server offline · local mode';
+}
+
+// ─── Navigation ──────────────────────────────────────────────────────────────
+function nav(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  document.getElementById('pg-'+page).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(page==='progress') renderProgress();
+  if(page==='reminders') { renderReminders(); checkTwilioStatus(); }
+  if(page==='motivation') renderMotivation();
+}
+
+// ─── Timeline ────────────────────────────────────────────────────────────────
+function buildTimeline() {
+  const cw = db.currentWeek;
+  const groups = [[0,4,'2.5mg'],[4,8,'5mg'],[8,12,'7.5mg'],[12,16,'10mg'],[16,20,'12.5mg'],[20,24,'15mg']];
+  let html = '';
+  groups.forEach(([s,e,lbl]) => {
+    html += `<div class="dose-row"><div class="dl">${lbl}</div><div class="dw">`;
+    for(let i=s;i<e;i++){
+      const d=doses[i], isc=d.w===cw, isd=d.w<cw;
+      let cls='wk'+(isc?' curr':'')+(isd?' done':'')+(d.order&&!isd?' ord':'');
+      html+=`<div class="${cls}" onclick="wkClick(${d.w})" title="Week ${d.w} · ${d.mg}mg${d.order?' · Order next pen':''}">
+        ${d.order&&!isd?'<div class="opip"></div>':''}
+        <div class="wn">Wk${d.w}</div>
+        <div class="wd">${isd?'✓':d.mg}</div>
+      </div>`;
+    }
+    html += '</div></div>';
+  });
+  document.getElementById('timeline').innerHTML = html;
+}
+
+function wkClick(w) {
+  const log = db.logs.find(l=>l.week===w);
+  const d = doses[w-1];
+  toast(`Week ${w} (${d.mg}mg)${log&&log.weight?' — '+log.weight+'kg':'  — not logged yet'}`);
+  document.querySelectorAll('.nb')[1].click();
+  setTimeout(() => { document.getElementById('lw').value = w; }, 100);
+}
+
+function buildWeekSelect() {
+  document.getElementById('lw').innerHTML = doses.map(d=>`<option value="${d.w}">Week ${d.w} · ${d.mg} mg${d.order?' ⚠ Order pen':''}</option>`).join('');
+  document.getElementById('lw').value = db.currentWeek;
+}
+
+// ─── Header stats ────────────────────────────────────────────────────────────
+function updateHeader() {
+  const cw = db.currentWeek, d = doses[cw-1];
+  const wlogs = [...db.logs].filter(l=>l.weight).sort((a,b)=>a.week-b.week);
+  const sw = wlogs[0]?.weight, curw = wlogs.slice(-1)[0]?.weight;
+  const lost = (sw&&curw) ? +(sw-curw).toFixed(1) : 0;
+  const pct = (sw&&lost) ? ((lost/sw)*100).toFixed(1) : 0;
+
+  document.getElementById('hs-week').textContent = cw;
+  document.getElementById('hs-dose').textContent = d.mg+'mg';
+  document.getElementById('hs-lost').textContent = lost+'kg';
+  document.getElementById('hs-left').textContent = 25-cw;
+
+  document.getElementById('st-start').textContent = sw ? sw+'kg' : '—';
+  document.getElementById('st-curr').textContent = curw ? curw+'kg' : '—';
+  document.getElementById('st-lost').textContent = lost+' kg';
+  document.getElementById('st-pct').textContent = pct+'%';
+
+  const day=new Date().getDay(), days=day===0?7:7-day;
+  document.getElementById('bn-days').textContent = days;
+  document.getElementById('bn-sub').textContent = `${d.mg} mg · Week ${cw}`;
+  if(d.order){
+    document.getElementById('main-banner').style.background='linear-gradient(110deg,#D4A017,#F59E0B)';
+    document.getElementById('bn-title').textContent='⚠ Order next pen + take dose Sunday';
+  }
+}
+
+// ─── Logging ─────────────────────────────────────────────────────────────────
+async function saveLog() {
+  const wk=+document.getElementById('lw').value;
+  const wt=parseFloat(document.getElementById('lwt').value);
+  if(!wt||wt<30||wt>250){toast('Please enter a valid weight (30–250 kg)');return;}
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true; btn.textContent='Saving...';
+  const body = { week:wk, weight:wt,
+    waist:parseFloat(document.getElementById('lwa').value)||null,
+    energy:parseInt(document.getElementById('len').value)||null,
+    effects:document.getElementById('lef').value.trim(),
+    notes:document.getElementById('lno').value.trim(),
+    injected:document.getElementById('linj').value };
+  try {
+    const r = await apiPost('/api/log', body);
+    db.currentWeek = r.currentWeek;
+    const existing = db.logs.find(l=>l.week===wk);
+    if(existing) Object.assign(existing,body); else db.logs.push({...body,date:new Date().toISOString()});
+    localStorage.setItem('sireesha_local', JSON.stringify(db));
+    buildTimeline(); updateHeader(); renderHistory(); updateDashChart();
+    toast('Week '+wk+' saved to server ✓');
+    clearForm();
+  } catch(e) { toast('Save failed — check server connection'); }
+  btn.disabled=false; btn.textContent='Save week entry';
+}
+
+function clearForm() {
+  ['lwt','lwa','len','lef','lno'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('linj').value='';
+  document.getElementById('log-imgs').innerHTML='';
+}
+
+function handleImg(e) {
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload = async ev => {
+    const wk=+document.getElementById('lw').value;
+    try { await apiPost('/api/photo',{week:wk,src:ev.target.result}); } catch(e){}
+    db.photos.push({week:wk,src:ev.target.result,date:new Date().toISOString()});
+    const img=document.createElement('img');
+    img.src=ev.target.result; img.className='ith';
+    document.getElementById('log-imgs').appendChild(img);
+    toast('Photo saved!');
+  };
+  reader.readAsDataURL(file);
+}
+
+// ─── History list ─────────────────────────────────────────────────────────────
+function renderHistory() {
+  const sorted=[...db.logs].sort((a,b)=>b.week-a.week);
+  document.getElementById('entry-count').textContent=sorted.length+' week'+(sorted.length!==1?'s':'')+' logged';
+  if(!sorted.length){document.getElementById('log-hist').innerHTML='<p style="font-size:13px;color:var(--muted);text-align:center;padding:1.5rem 0">No entries yet</p>';return;}
+  const asc=[...sorted].reverse();
+  document.getElementById('log-hist').innerHTML=sorted.map((l,i)=>{
+    const idx=asc.findIndex(x=>x.week===l.week);
+    const prev=asc[idx-1];
+    const delta=(l.weight&&prev?.weight)?+(prev.weight-l.weight).toFixed(1):null;
+    const deltaHtml=delta!==null?`<span class="${delta>0?'dd':'du'}">${delta>0?'−':'+'} ${Math.abs(delta).toFixed(1)} kg</span>`:'';
+    const effs=l.effects?l.effects.split(',').map(e=>`<span class="etag">${e.trim()}</span>`).join(''):'';
+    return `<div class="li">
+      <span class="lwb ${l.week<db.currentWeek?'d':''}">Wk ${l.week}</span>
+      <div class="ld">
+        ${l.weight?`<div class="lw">${l.weight} kg</div>`:''}
+        ${l.waist?`<div class="ln">Waist: ${l.waist} cm</div>`:''}
+        ${l.energy?`<div class="ln">Energy: ${l.energy}/10</div>`:''}
+        ${effs?`<div style="margin-top:4px">${effs}</div>`:''}
+        ${l.notes?`<div class="ln" style="margin-top:3px">${l.notes}</div>`:''}
+      </div>
+      <div class="ldelta">${deltaHtml}</div>
+    </div>`;
+  }).join('');
+}
+
+// ─── Charts ──────────────────────────────────────────────────────────────────
+const CH_OPTS = {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{font:{size:11}}},x:{grid:{display:false},ticks:{font:{size:11}}}}};
+
+function mkChart(id,type,labels,data,color,opts={}) {
+  if(charts[id]) charts[id].destroy();
+  const ctx=document.getElementById(id)?.getContext('2d'); if(!ctx) return;
+  charts[id]=new Chart(ctx,{type,data:{labels,datasets:[{label:'',data,borderColor:color,backgroundColor:color+'22',tension:0.4,fill:type==='line',pointRadius:4,pointBackgroundColor:color,borderRadius:4,...opts}]},options:{...CH_OPTS}});
+}
+
+function updateDashChart() {
+  const logs=[...db.logs].filter(l=>l.weight).sort((a,b)=>a.week-b.week);
+  const msg=document.getElementById('no-data-msg');
+  if(!logs.length){if(msg)msg.style.display='block';return;}
+  if(msg)msg.style.display='none';
+  mkChart('dash-chart','line',logs.map(l=>'Wk '+l.week),logs.map(l=>l.weight),'#C2185B');
+}
+
+function renderProgress() {
+  const logs=[...db.logs].filter(l=>l.weight).sort((a,b)=>a.week-b.week);
+  const sw=logs[0]?.weight, cw=logs.slice(-1)[0]?.weight;
+  const lost=sw&&cw?+(sw-cw).toFixed(1):0;
+  const lastWaist=[...db.logs].filter(l=>l.waist).sort((a,b)=>b.week-a.week)[0];
+
+  document.getElementById('pr-s').textContent=sw?sw+'kg':'—';
+  document.getElementById('pr-l').textContent=lost+'kg';
+  document.getElementById('pr-w').textContent=lastWaist?lastWaist.waist+'cm':'—';
+  document.getElementById('pr-wks').textContent=db.logs.length;
+
+  mkChart('wt-chart','line',logs.map(l=>'Wk '+l.week),logs.map(l=>l.weight),'#C2185B');
+
+  const deltas=[];
+  for(let i=1;i<logs.length;i++) deltas.push(+(logs[i-1].weight-logs[i].weight).toFixed(2));
+  if(charts['bar-chart']) charts['bar-chart'].destroy();
+  const bCtx=document.getElementById('bar-chart')?.getContext('2d');
+  if(bCtx&&deltas.length) charts['bar-chart']=new Chart(bCtx,{type:'bar',data:{labels:logs.slice(1).map(l=>'Wk '+l.week),datasets:[{data:deltas,backgroundColor:deltas.map(d=>d>=0?'rgba(76,175,125,0.75)':'rgba(229,115,115,0.75)'),borderRadius:5}]},options:{...CH_OPTS}});
+
+  const elogs=logs.filter(l=>l.energy);
+  mkChart('en-chart','line',elogs.map(l=>'Wk '+l.week),elogs.map(l=>l.energy),'#D4A017');
+
+  // photos
+  const pg=document.getElementById('photo-gallery'), np=document.getElementById('no-photos');
+  if(db.photos.length){
+    np.style.display='none';
+    pg.innerHTML=db.photos.map(p=>`<div><img src="${p.src}" class="ith"><div style="font-size:10px;color:var(--muted);text-align:center;margin-top:3px">Wk ${p.week}</div></div>`).join('');
+  } else { np.style.display='block'; pg.innerHTML=''; }
+
+  // milestones
+  const targets=[{kg:1,icon:'🎯',l:'First kilogram gone!'},{kg:2,icon:'⭐',l:'2 kg down'},{kg:5,icon:'🏅',l:'5 kg milestone!'},{kg:10,icon:'🏆',l:'10 kg — incredible!'},{kg:15,icon:'👑',l:'15 kg champion!'},{pct:5,icon:'💪',l:'5% body weight lost'},{pct:10,icon:'🔥',l:'10% body weight lost'},{pct:15,icon:'🌟',l:'15% — clinical trial result!'}];
+  document.getElementById('milestones').innerHTML=targets.map(t=>{
+    const ok=t.kg?lost>=t.kg:(sw?lost/sw*100>=t.pct:false);
+    return `<div class="mst" style="opacity:${ok?1:0.4}">
+      <span style="font-size:20px">${t.icon}</span>
+      <span style="font-size:13px;color:${ok?'var(--ink)':'var(--muted)'};flex:1">${t.l}</span>
+      ${ok?'<span class="pill p-g">Achieved!</span>':'<span style="font-size:11px;color:var(--muted)">upcoming</span>'}
+    </div>`;
+  }).join('');
+}
+
+// ─── Reminders ───────────────────────────────────────────────────────────────
+function renderReminders() {
+  const cw=db.currentWeek;
+  const upcoming=doses.filter(d=>d.w>=cw).slice(0,8);
+  document.getElementById('rem-list').innerHTML=upcoming.map(d=>`
+    <div class="ri">
+      <div class="rdot ${d.w===cw?'rd-r':d.order?'rd-g':'rd-s'}"></div>
+      <div class="rinfo"><div class="rt">Week ${d.w} · ${d.mg} mg injection</div><div class="rs">Every Sunday${d.order?' + order next pen alert':''}</div></div>
+      <span class="pill ${d.w===cw?'p-r':d.order?'p-d':'p-g'}">${d.w===cw?'Next up':d.order?'Order alert':'Scheduled'}</span>
+    </div>`).join('');
+}
+
+async function checkTwilioStatus() {
+  const el=document.getElementById('twilio-status');
+  try {
+    const r=await apiGet('/api/data');
+    el.innerHTML=`<span style="color:var(--sage);font-weight:500">✅ Server connected</span><br>
+    Cron job running — Sunday 8:00 AM IST reminders are active.<br>
+    Fill your Twilio credentials in <code>.env</code> on the server to activate WhatsApp sending.`;
+  } catch(e) {
+    el.innerHTML=`<span style="color:#e57373;font-weight:500">⚠ Server not reachable</span><br>Start the server with <code>node server.js</code> and ensure your .env is configured.`;
+  }
+}
+
+async function triggerServerReminder() {
+  try {
+    const r=await apiPost('/api/remind',{});
+    toast(r.mock?'Reminder triggered (mock mode — add Twilio credentials)':'WhatsApp sent! SID: '+r.sid);
+  } catch(e) { toast('Server not reachable'); }
+}
+
+function enableNotifs() {
+  if(!('Notification' in window)){toast('Notifications not supported in this browser');return;}
+  Notification.requestPermission().then(p=>{
+    document.getElementById('notif-status').textContent=p==='granted'?'✅ Notifications enabled — you\'ll be reminded every Sunday':'Please allow notifications in browser settings';
+    toast(p==='granted'?'Browser notifications enabled!':'Please allow notifications in settings');
+  });
+}
+
+function testNotif() {
+  if(Notification.permission!=='granted'){toast('Enable notifications first');return;}
+  const d=doses[db.currentWeek-1];
+  new Notification('🌸 Mounjaro Reminder — Sireesha',{body:`Week ${db.currentWeek} · ${d.mg}mg · Time for your injection! You're doing amazing!`});
+  toast('Test notification sent!');
+}
+
+function checkSundayNotif() {
+  if(new Date().getDay()===0){
+    const d=doses[db.currentWeek-1];
+    new Notification('🌸 Mounjaro Sunday Reminder',{body:`Week ${db.currentWeek} · ${d.mg}mg dose today, Sireesha! You've got this 💜`});
+  }
+}
+
+function sendWANow() {
+  const d=doses[db.currentWeek-1];
+  const msg=`💜 Mounjaro Reminder!\n\nWeek ${db.currentWeek} · ${d.mg}mg injection\n\nSireesha, you're doing amazing! Keep going! 🌟${d.order?'\n\n⚠️ ORDER YOUR NEXT PEN this week!':''}`;
+  window.open('https://wa.me/919945977880?text='+encodeURIComponent(msg));
+}
+
+// ─── AI Coach ────────────────────────────────────────────────────────────────
+async function askCoach() {
+  const q=document.getElementById('coach-q').value.trim();
+  if(!q){toast('Please type a question first');return;}
+  const box=document.getElementById('ai-resp');
+  box.style.display='block'; box.className='ai-box loading pulsing'; box.textContent='Your coach is thinking...';
+  try {
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,system:`You are a warm, knowledgeable health coach for Sireesha, who is on a 24-week Mounjaro (tirzepatide) programme starting April 27 2026. She is currently on week ${db.currentWeek} at ${doses[db.currentWeek-1].mg}mg. Be personal, encouraging, and medically accurate. Always remind her to consult her doctor for medical decisions.`,messages:[{role:'user',content:q}]})});
+    const data=await r.json();
+    const text=data.content?.find(c=>c.type==='text')?.text||'I had trouble connecting. Try again!';
+    box.className='ai-box'; box.style.fontStyle='normal';
+    box.innerHTML=text.replace(/\n/g,'<br>');
+  } catch(e){ box.className='ai-box'; box.textContent='Coach is offline right now. Please try again!'; }
+}
+
+function renderMotivation() {
+  document.getElementById('daily-quote').textContent=quotes[(new Date().getDay())%quotes.length];
+}
+
+function toast(msg,dur=3000) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+init();
+</script>
+</body>
+</html>
